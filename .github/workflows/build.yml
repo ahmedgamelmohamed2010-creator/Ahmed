@@ -26,6 +26,9 @@ jobs:
         pip install --upgrade pip
         pip install cython==0.29.36 buildozer
 
+    - name: Initialize Buildozer
+      run: buildozer init || true
+
     - name: Build with Buildozer
       run: buildozer -v android debug
 
