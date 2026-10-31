@@ -26,14 +26,16 @@ jobs:
         pip install --upgrade pip
         pip install cython==0.29.36 buildozer
 
-    - name: Initialize Buildozer
-      run: buildozer init || true
-
-    - name: Build with Buildozer
-      run: buildozer -v android debug
+    - name: Accept Android Licenses and Build
+      run: |
+        mkdir -p ~/.android
+        touch ~/.android/repositories.cfg
+        yes | buildozer init || true
+        buildozer -v android debug
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
       with:
         name: package
         path: bin/*.apk
+
